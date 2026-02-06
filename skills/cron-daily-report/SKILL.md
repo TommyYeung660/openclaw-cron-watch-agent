@@ -40,6 +40,12 @@ user-invocable: true
 
 ## 報告格式（Markdown 建議）
 - 標題：`# Cron 日總結：YYYY-MM-DD（昨日）`
+- **資料完整性聲明（必備）**：
+  - `cron.list` 是否成功取得 job 清單
+  - `cron.runs` 是否能取得足夠 runs（若 runs 記錄量太少，必須明確寫明「昨日可能未被覆蓋」，避免把「0 runs」誤判成故障）
+- **昨日新增 Cron Jobs（必備）**：
+  - 以 `createdAtMs` 落在昨日（Asia/Hong_Kong 00:00-23:59）為準
+  - 列出：name、jobId、schedule、sessionTarget、enabled
 - 總覽：總 runs / 成功 / 失敗 / 成功率
 - 失敗原因 Top（分「通知層」同「工作本體層」）
 - Job 列表（只列：昨日有 run 的 job；失敗 job 放前面）
