@@ -1,0 +1,8 @@
+.DS_Store
+
+# Local state
+state/
+logs/
+memory/
+
+# Reports are kept
