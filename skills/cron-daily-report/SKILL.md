@@ -23,10 +23,11 @@ user-invocable: true
 
 ## 可用工具
 - 使用 `cron` 工具：
+  - `cron.status()`（可選）
   - `cron.list(includeDisabled:true)`
   - `cron.runs(jobId)`
 - 使用 `write`/`edit`：寫 report 檔
-- 使用 `message.send`：發送摘要到群組（只發摘要，唔好貼長 log）
+- 使用 `message.send`：發送摘要到群組（只發摘要，唔好貼長 log；目標必須係數字 chat id）
 
 ## 操作步驟（建議）
 1) 用 `cron.list(includeDisabled:true)` 取得 job 清單。
@@ -37,6 +38,14 @@ user-invocable: true
 4) 匯總全局：總 runs、成功、失敗、成功率。
 5) 寫入 report 檔（Markdown）。
 6) 組裝 10~20 行摘要並發到 Telegram 群組 `-5162606720`。
+
+## Telegram 發送規則（必讀）
+- 只可以用 `message.send`。
+- `channel` 用 `telegram`。
+- `to` **必須**係字面值 `-5162606720`（唔好用 "cron-watch"、唔好用群組名、唔好用 @username）。
+- 如 `message.send` 失敗：
+  - 仍然要把報告檔寫入成功；
+  - 在 report 內加一段「通知層失敗」說明（含錯誤字串，但唔好貼 token）。
 
 ## 報告格式（Markdown 建議）
 - 標題：`# Cron 日總結：YYYY-MM-DD（昨日）`
