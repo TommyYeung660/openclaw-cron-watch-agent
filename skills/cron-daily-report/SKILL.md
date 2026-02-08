@@ -47,6 +47,20 @@ user-invocable: true
   - 仍然要把報告檔寫入成功；
   - 在 report 內加一段「通知層失敗」說明（含錯誤字串，但唔好貼 token）。
 
+## 檔案層日誌（必做，用於追查）
+除咗寫 `reports/YYYY-MM-DD.md`，你必須同時寫一份「執行日誌」到：
+- `logs/daily-report-YYYY-MM-DD.log`（YYYY-MM-DD = 昨日日期）
+
+日誌內容最少包含：
+- 開始/結束時間（含時區 Asia/Hong_Kong）
+- `cron.status` / `cron.list` / 每個 `cron.runs(jobId)` 是否成功
+- 若工具調用失敗（例如 `gateway timeout`），必須原樣記錄錯誤字串
+- 成功寫 report 檔、以及 `message.send` 成功/失敗結果
+
+注意：
+- 日誌只寫到檔案，唔好整段貼去 Telegram。
+- 唔好寫入任何 secrets/token。
+
 ## 報告格式（Markdown 建議）
 - 標題：`# Cron 日總結：YYYY-MM-DD（昨日）`
 - **資料完整性聲明（必備）**：
